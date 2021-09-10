@@ -1,10 +1,11 @@
 import pandas as pd
 
 
-classScore = pd.read_csv("../data/score.csv")
-first_3_Column = classScore[['Positive_Climate', 'Teachers_Sensitivity', 'Regard_Student_Perspective']]
-second_3_Column = classScore[['Behavior_Management', 'Productivity', 'Instruction_Learning_Format']]
-third_3_Column = classScore[['Content_Understanding', 'Quality_OF_Feedback', 'Language_Development']]
+classScore = pd.read_csv("../data/score_raw.csv")
+
+first_3_Column = classScore[['Climate', 'Sensitivity', 'Respect']]
+second_3_Column = classScore[['Behavior', 'Productivity', 'Instruction_Fromat']]
+third_3_Column = classScore[['Content_Understanding', 'Feedback', 'Language']]
 
 mean_first = first_3_Column.mean()
 emotion = "{0:.2f}".format(mean_first.mean())

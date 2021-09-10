@@ -1,7 +1,7 @@
 import pandas as pd
 
 classScore = pd.read_csv("../data/score_raw.csv")
-# 按照学校类型分组
+# 按照学校类型分组 城市私立是1，城市公立是2，农村公立3
 score_by_school = classScore.groupby('School')
 # 分组后统计均值
 group_mean = score_by_school.mean()

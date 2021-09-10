@@ -1,16 +1,17 @@
 import pandas as pd
 
 
-classScore = pd.read_csv("../data/score.csv")
-first_3_Column = classScore[['Positive_Climate', 'Teachers_Sensitivity', 'Regard_Student_Perspective']]
-second_3_Column = classScore[['Behavior_Management', 'Productivity', 'Instruction_Learning_Format']]
-third_3_Column = classScore[['Content_Understanding', 'Quality_OF_Feedback', 'Language_Development']]
+classScore = pd.read_csv("../data/score_raw.csv")
+first_3_Column = classScore[['Climate', 'Sensitivity', 'Respect']]
+second_3_Column = classScore[['Behavior', 'Productivity', 'Instruction_Fromat']]
+third_3_Column = classScore[['Content_Understanding', 'Feedback', 'Language']]
 
-mean_first = first_3_Column.mean(axis=1)
-mean_second = second_3_Column.mean(axis=1)
-mean_third = third_3_Column.mean(axis=1)
+emotion = first_3_Column.mean(axis=1)
+organization = second_3_Column.mean(axis=1)
+instruction = third_3_Column.mean(axis=1)
 
-new_set = pd.DataFrame({'first':mean_first,'second':mean_second,'third':mean_third,'TSs':classScore['TSs'],'TU':classScore['TU'],'SL':classScore['SL'],'SS':classScore['SS'],'CX':classScore['CX'],'School':classScore['School']})
+# ,'TSs':classScore['TSs']
+new_set = pd.DataFrame({'emotion':emotion,'organization':organization,'instruction':instruction})
 detail_information_new_set = new_set.describe().applymap("{0:.2f}".format)
 pearson_new_set = new_set.corr().applymap("{0:.2f}".format)
 kendall_new_set = new_set.corr(method='kendall').applymap("{0:.2f}".format)
@@ -20,3 +21,7 @@ spearman_new_set = new_set.corr(method='spearman').applymap("{0:.2f}".format)
 
 
 
+# 1. Table. 1要把教师指导活动和学生指导活动占的时间加总一下（whole class+individual两部分求和，Peers 和task求和），加上multiple总共三部分，求这三部分和classroom quality 的关系，
+# 先求跟emotion，organization以及instruction关系，再求各个变量之间关系。emotion就是climate，sensitivity，respect三个变量的平均值，organization是productivity，bahavior，instruction format平均值以及instruction是反馈，content和language三个变量的均值。
+# 2.加个变量—-学校类型—对教师指导活动，和学生指导活动，multiple 三种类型的影响。以及学校类型和emotion，organization以及instruction的相关性
+# 3. 算下Cronbach’s alpha系数
