@@ -11,11 +11,19 @@ organization = second_3_Column.mean(axis=1)
 instruction = third_3_Column.mean(axis=1)
 
 # ,'TSs':classScore['TSs']
-new_set = pd.DataFrame({'emotion':emotion,'organization':organization,'instruction':instruction})
-detail_information_new_set = new_set.describe().applymap("{0:.2f}".format)
-pearson_new_set = new_set.corr().applymap("{0:.2f}".format)
-kendall_new_set = new_set.corr(method='kendall').applymap("{0:.2f}".format)
-spearman_new_set = new_set.corr(method='spearman').applymap("{0:.2f}".format)
+new_set = pd.DataFrame({'emotion':emotion,'organization':organization,'instruction':instruction,'School':classScore['School']})
+new_set_format = new_set.applymap("{0:.2f}".format)
+
+new_set_format.to_csv("../data/a.csv", index=False)
+
+
+
+
+
+# detail_information_new_set = new_set.describe().applymap("{0:.2f}".format)
+# pearson_new_set = new_set.corr().applymap("{0:.2f}".format)
+# kendall_new_set = new_set.corr(method='kendall').applymap("{0:.2f}".format)
+# spearman_new_set = new_set.corr(method='spearman').applymap("{0:.2f}".format)
 
 
 
